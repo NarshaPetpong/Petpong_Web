@@ -1,0 +1,100 @@
+*{
+    margin: 0;
+}
+
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css') format('pretendard');
+    font-weight: normal;
+    font-style: normal;
+} 
+
+/* background */
+body {
+    background-image: url("../images/bubble/background.svg");
+    background-size: cover;
+}
+
+.background {
+    display: flex;
+    justify-content: flex-end;
+    height: 100%;
+    width: 100%;
+    margin-left: -250px;
+}
+
+.app_background{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    width: 400px;
+    height: 100vh;
+}
+
+.navbar .logo{
+    width: 50px;
+    height: 50px;
+}
+
+.content_box{
+    display: flex;
+    justify-content: space-between;
+}
+
+.content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 827px;
+    background-color: #f2f2f2;
+}
+
+.navibar_box{
+    justify-content: center;
+    display: flex;
+    background-color: #ffffff;
+    width: 400px;
+}
+
+.navi_ikon{
+    display: flex;
+    justify-content: center;
+}
+
+.navi_ikon_img img{
+    width: 30px;
+    padding: 20px;
+    position: relative;
+}
+
+.navi_ikon_img .pet_btn{
+    margin-left: -5px;
+}
+
+.navi_ikon_img .home_btn{
+    margin-left: 60px;
+} 
+
+.navi_ikon_img .my_btn{
+    margin-left: 60px;
+}
+
+.navi_ikon_text a {
+    text-decoration: none;
+    color: #a3a3a3;
+    font-size: 10px;
+    padding-left: 56px;
+    padding-right: 56px;
+}
+
+.navi_ikon_text{
+    position: absolute;
+    list-style: none;
+    display: flex;
+
+    margin-top: 45px;
+}
+
