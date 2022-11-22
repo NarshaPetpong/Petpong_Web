@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>펫퐁 로그인</title>
+  <link rel="stylesheet" href="펫퐁_로그인.css">
+  <style>
+  </style>
+</head>
+
+<body>
+  <div>
+    <form action="#" method="post">
+      <p>
+        <label for="name" class="id">아이디</label><br>
+        <input type="text" id="name" name="아이디" class="id">
+        <img class="id_img" src="나르샤_사람이미지-removebg-preview.png" style=" width: 18px; height:18px;">
+      </p>
+      <p>
+        <label for="password" class="password">비밀번호</label><br>
+        <input type="password" id="password" name="비밀번호" class="password">
+        <img class="password_img" src="나르샤_자물쇠이미지-removebg-preview.png" style=" width: 18px; height:18px;">
+      </p>
+      <button class="button" id="login">로그인하기</button>
+      </p>
+      <p class="h">아직 회원이 아니신가요?</p>
+      <a class="logein" href="펫퐁_회원가입.html">회원가입하기</a>
+      <p>
+        <img src="로그인 댕댕이.svg " class="b">
+      </p>
+    </form>
+    <script>
+      $("#login").on('click', function () {
+    // alert('test')   
+    $.ajax({
+      url: "http://10.80.161.178:8080/signup",
+      type: "post",
+      dataType: "json",
+      contentType: "application/json",
+      data: JSON.stringify({
+        "id": $('#userid').val(),
+        "password": $('#password').val(),
+        "email": $('#email').val(),
+        "certification_number" : $('#in').val(),
+      }),
+      success: function (result) {
+        console.log(result);
+        alert("회원가입에 성공하였습니다.")
+      },
+      error: function (result) {
+        console.log(result);
+        alert("회원가입에 실패하였습니다.")
+      }
+    });
+  });
+  $("#email").on('click', function () {
+    $.ajax({
+      url: "http://10.80.161.178:8080/",
+      type: "post",
+      dataType: "json",
+      data: JSON.stringify({
+        "email": $('email'),
+      })
+    })
+  })
+    </script>
+  </div>
+  
+</body>
+
+</html>
