@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>펫퐁 회원가입</title>
+  <link rel="stylesheet" href="Petpong_membership_registration.css">
+  <style>
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+  <canvas id="ballCanvas" width="1920px" height="1920px"></canvas>
+  <div>
+    <form action="#" method="post">
+      <p>
+        <label for="name" class="id">아이디</label><br>
+        <input type="text" id="userid" class="id">
+        <img class="id_img" src="나르샤_사람이미지-removebg-preview.png" style=" width: 18px; height:18px;">
+      </p>
+      <p>
+        <label for="password" class="password">비밀번호</label><br>
+        <input type="password" id="password" name="비밀번호" class="password">
+        <img class="password_img" src="나르샤_자물쇠이미지-removebg-preview.png" style=" width: 18px; height:18px;">
+      </p>
+      <p>
+        <label for="email" class="email">이메일</label><br>
+        <input id="email" type="email" name="이메일" class="email">
+        <input type="submit" value="" class="send">
+        <!--전송버튼-->
+        <img class="email_img" src="나르샤_이메일이미지-removebg-preview.png" style=" width: 18px; height:18px;">
+      </p>
+      <p>
+        <label for="in" class="Certification_Number">인증번호</label><br>
+        <input type="number" id="in" name="인증번호" class="Certification_Number">
+        <img class="Certification_Number_img" src="나르샤_이메일이미지-removebg-preview.png" style=" width: 18px; height:18px;">
+      </p>
+      <p>
+        <img class="pet_pong_img" src="나르샤_펫퐁이미지.png">
+      </p>
+      <input type="button" class="button" id="loginform" value="회원가입하기">
+      </p>
+      <p class="h">만약 회원이시면?</p>
+      <a class="logein" href="펫퐁_로그인.html">로그인하기</a>
+    </form>
+  </div>
+  <!-- <div id="test">
+    test
+  </div> -->
+</body>
+
+</html>
+<script>
+  // $("#test").on('click',function(){ alert('누름')})
+  $("#loginform").on('click', function () {
+    // alert('test')
+    $.ajax({
+      url: "http://10.80.161.178:8080/signup",
+      type: "post",
+      dataType: "json",
+      contentType: "application/json",
+      data: JSON.stringify({
+        "id": $('#userid').val(),
+        "password": $('#password').val(),
+        "email": $('#email').val(),
+        "certification_number" : $('#in').val(),
+      }),
+      success: function (result) {
+        console.log(result);
+        alert("회원가입에 성공하였습니다.")
+      },
+      error: function (result) {
+        console.log(result);
+        alert("회원가입에 실패하였습니다.")
+      }
+    });
+  });
+  $("#email").on('click', function () {
+    $.ajax({
+      url: "http://10.80.161.178:8080/",
+      type: "post",
+      dataType: "json",
+      data: JSON.stringify({
+        "email": $('email'),
+      })
+    })
+  })
+</script>
+<script>
+  let ballCanvas = document.getElementById("ballCanvas");
+  let ctx = ballCanvas.getContext("2d");
+
+  let ball = { x: Math.random() * 1920, y: Math.random() * 1920, x_speed: 10, y_speed: 10 };
+
+
+
+  setInterval(ballMove, 50);
+
+  //공 이동
+  function ballMove(img) {
+
+    // 이전 공 그림 제거
+    ctx.clearRect(0, 0, 1920, 1920);
+
+    // ctx.beginPath();
+    // ctx.arc(ball.x, ball.y, 15, 0, 2*Math.PI, true);
+    // ctx.closePath();
+
+    // // 공 디자인
+    // ctx.fill();  
+    // ctx.stroke();
+
+    // 공 튕기기
+    if (ball.x + ball.x_speed > 1920 || ball.x + ball.x_speed < 0) {
+      ball.x_speed = ball.x_speed * (-1);
+    }
+
+    if (ball.y + ball.y_speed > 1080 || ball.y + ball.y_speed < 0) {
+      ball.y_speed = ball.y_speed * (-1);
+    }
+    // 공 위치 변경
+    ball.x += ball.x_speed;
+    ball.y += ball.y_speed;
+
+    var img = new Image();
+    img.src = "pretty_buble.png";
+
+    //이미지 객체 생성               //code.jpg라는 이미지 파일을 로딩 시작
+    img.onload = function () {
+      //(20,20)을 중심으로 100*100의 사이즈로 이미지를 그림
+      ctx.drawImage(img, ball.x, ball.y, 100, 100)
+    }
+
+
+  }
+
+</script>
